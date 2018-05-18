@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:onClick="clickLis"
+        android:text="QQ登录"
+        android:id="@+id/login_qq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="clickLis"
+        android:text="微信登录 (没有账号)"
+        android:id="@+id/login_wechat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="clickLis"
+        android:text="微博登录 (没有账号)"
+        android:id="@+id/login_sina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:onClick="clickLis"
+        android:text="Twitter登录"
+        android:id="@+id/login_twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

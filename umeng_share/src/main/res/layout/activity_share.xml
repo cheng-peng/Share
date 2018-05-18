@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:textAllCaps="false"
+        android:onClick="clickLis"
+        android:text="QQ分享"
+        android:id="@+id/share_qq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:onClick="clickLis"
+        android:text="Qzone分享"
+        android:id="@+id/share_qzone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="clickLis"
+        android:text="短信分享"
+        android:id="@+id/share_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:onClick="clickLis"
+        android:text="FaceBook分享"
+        android:id="@+id/share_facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:textAllCaps="false"
+        android:onClick="clickLis"
+        android:text="Twitter分享"
+        android:id="@+id/share_twitter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
