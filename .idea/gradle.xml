@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/mob" />
             <option value="$PROJECT_DIR$/mob_share" />
             <option value="$PROJECT_DIR$/umeng" />
             <option value="$PROJECT_DIR$/umeng_share" />

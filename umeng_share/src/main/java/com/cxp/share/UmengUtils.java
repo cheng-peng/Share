@@ -22,7 +22,7 @@ public class UmengUtils {
         //豆瓣RENREN平台目前只能在服务器端配置
         PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
         PlatformConfig.setTwitter("3aIN7fuF685MuZ7jtXkQxalyi", "MK6FEYG63eWcpDFgRYw4w9puJhzDl0tyuqWjZ3M7XJuuG7mMbO");
-        PlatformConfig.setAlipay("2015111700822536");
+        PlatformConfig.setAlipay("2018051860142870");
         PlatformConfig.setDing("dingoalmlnohc0wggfedpk");
     }
 }

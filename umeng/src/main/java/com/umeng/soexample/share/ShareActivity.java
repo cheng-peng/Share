@@ -34,7 +34,7 @@ public class ShareActivity extends AppCompatActivity {
     }
 
     public void clickLis(View view) {
-        ShareUtils.IMG_PATH = "http://www.cxp521.com/imaes.jpg";
+        ShareUtils.IMG_PATH = "http://www.cxp521.com/images.jpg";
         ShareUtils.URL = "http://www.cxp521.com/";
         ShareUtils.CONTENT = "内容。";
         switch (view.getId()) {
@@ -56,7 +56,7 @@ public class ShareActivity extends AppCompatActivity {
                 break;
             case R.id.share_sina:
                 //新浪分享
-                ShareUtils.shareUrl(ShareActivity.this, SHARE_MEDIA.SINA,shareListener);
+                ShareUtils.shareTextAndImage(ShareActivity.this, SHARE_MEDIA.SINA,shareListener);
                 break;
             case R.id.share_facebook:
                 //FaceBook分享
@@ -92,7 +92,6 @@ public class ShareActivity extends AppCompatActivity {
         @Override
         public void onCancel(SHARE_MEDIA platform) {
             Toast.makeText(ShareActivity.this,"取消了",Toast.LENGTH_LONG).show();
-
         }
     };
 

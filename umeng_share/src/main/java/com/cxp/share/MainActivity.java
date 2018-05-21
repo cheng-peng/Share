@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.cxp.share.login.LoginActivity;
+import com.cxp.share.share.ShareActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.main_share:
                 //分享
-//                ShareActivity.startActivity(mContext);
+                ShareActivity.startActivity(mContext);
                 break;
         }
     }

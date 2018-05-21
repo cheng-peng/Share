@@ -1,222 +1,167 @@
-//package com.cxp.share.share;
-//
-//import com.cxp.share.AppUtils;
-//import com.cxp.share.MainActivity;
-//import com.umeng.socialize.UMShareAPI;
-//import com.umeng.socialize.UMShareConfig;
-//import com.umeng.socialize.bean.SHARE_MEDIA;
-//
-//import cn.sharesdk.facebook.Facebook;
-//import cn.sharesdk.framework.Platform;
-//import cn.sharesdk.framework.PlatformActionListener;
-//import cn.sharesdk.framework.ShareSDK;
-//import cn.sharesdk.system.text.ShortMessage;
-//import cn.sharesdk.tencent.qq.QQ;
-//import cn.sharesdk.tencent.qzone.QZone;
-//import cn.sharesdk.twitter.Twitter;
-//import cn.sharesdk.wechat.friends.Wechat;
-//import cn.sharesdk.wechat.moments.WechatMoments;
-//
-///**
-// * 文 件 名: ShareUtils
-// * 创 建 人: CXP
-// * 创建日期: 2017-02-08 16:30
-// * 描    述: 分享工具类
-// * 修 改 人:
-// * 修改时间：
-// * 修改备注：
-// */
-//public class ShareUtils {
-//
-//    //图片连接
-//    public static String IMG_URL = "https://www.cxp521.com/images.jpg";
-//
-//    //分享内容
-//    public static String CONTENT = "";
-//    //分享图片
-//    public static String IMG_PATH = "";
-//    //点击后跳转的连接
-//    public static String URL = "";
-//    //分享标题
-//    public final static String TITLE = "CXP";
-//
-//    /**
-//     * 新浪分享
-//     */
-//    public static void sinaShare(PlatformActionListener listener) {
-//
-//                        UMShareConfig config = new UMShareConfig();
-//                config.isNeedAuthOnGetUserInfo(true);
-//                UMShareAPI mShareAPI = UMShareAPI.get(MainActivity.this);
-//                mShareAPI.setShareConfig(config);
-//                mShareAPI.getPlatformInfo(MainActivity.this, SHARE_MEDIA.SINA, authListener);
+package com.cxp.share.share;
+
+import android.app.Activity;
+
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.UMShareListener;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+
+/**
+ * 文 件 名: ShareUtils
+ * 创 建 人: CXP
+ * 创建日期: 2017-02-08 16:30
+ * 描    述: 分享工具类
+ * 修 改 人:
+ * 修改时间：
+ * 修改备注：
+ */
+public class ShareUtils {
+
+    //图片连接
+    public static String IMG_URL = "http://www.cxp521.com/images.jpg";
+    //分享内容
+    public static String CONTENT = "";
+    //分享图片
+    public static String IMG_PATH = "";
+    //点击后跳转的连接
+    public static String URL = "";
+    //标题
+    public static String TITLE = "CXP";
+
+    public static void shareTextAndImage(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+        //本地图
+//        UMImage imagelocal = new UMImage(activity, R.mipmap.ic_launcher);
+        UMImage imageurl = new UMImage(activity,IMG_URL);
+        //缩略图
+//        imagelocal.setThumb(new UMImage(activity, R.drawable.ic_launcher_background));
+        new ShareAction(activity).withText(CONTENT)
+                .withMedia(imageurl)
+                .setPlatform(share_media)
+                .setCallback(umShareListener).share();
+    }
+
+    public static void shareUrl(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+        UMWeb web = new UMWeb(URL);
+        web.setTitle(TITLE);
+        //缩略图
+        web.setThumb(new UMImage(activity, IMG_URL));
+        web.setDescription(CONTENT);
+        new ShareAction(activity).withMedia(web)
+                .setPlatform(share_media)
+                .setCallback(umShareListener).share();
+    }
+
+    //不常用
+//    //分享文本
+//    public void shareText(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        new ShareAction(activity).withText(CONTENT)
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
+//    }
+//    //分享本地图片
+//    public void shareImageLocal(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        UMImage imagelocal = new UMImage(activity, R.drawable.logo);
+//        imagelocal.setThumb(new UMImage(activity, R.drawable.thumb));
+//        new ShareAction(activity).withMedia(imagelocal )
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
+//    }
+//    //分享网络图片
+//    public void shareImageNet(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        UMImage imageurl = new UMImage(activity,Defaultcontent.imageurl);
+//        imageurl.setThumb(new UMImage(activity, R.drawable.thumb));
+//        new ShareAction(activity).withMedia(imageurl )
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
 //    }
 //
-//    /**
-//     * FaceBook分享
-//     */
-//    public static void faceBookShare(PlatformActionListener listener) {
-//
-//        //图片分享
-////        Platform platform = ShareSDK.getPlatform(Facebook.NAME);
-////        Platform.ShareParams shareParams = new  Platform.ShareParams();
-////        shareParams.setImageUrl("http://www.cxp521.com/images.jpg");
-////        shareParams.setContentType(Platform.SHARE_IMAGE);
-////        platform.setPlatformActionListener(listener);
-////        platform.share(shareParams);
-//
-//        Platform.ShareParams sp = new Platform.ShareParams();
-//        sp.setUrl("http://www.cxp521.com/facebook.html");
-//        Platform faceBook = ShareSDK.getPlatform(Facebook.NAME);
-//        // 设置分享事件回调
-//        faceBook.setPlatformActionListener(listener);
-//
-//        //执行图文分享
-//        faceBook.share(sp);
+//    //分享音乐
+//    public void shareMusic(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        UMusic music = new UMusic(Defaultcontent.musicurl);
+//        music.setTitle("activity is music title");
+//        music.setThumb(new UMImage(activity, R.drawable.thumb));
+//        music.setDescription("my description");
+//        music.setmTargetUrl(Defaultcontent.url);
+//        new ShareAction(activity).withMedia(music )
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
+//    }
+//    //分享视频
+//    public void shareVideo(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        UMVideo video = new UMVideo(Defaultcontent.videourl);
+//        video.setThumb(new UMImage(activity,R.drawable.thumb));
+//        video.setTitle("activity is video title");
+//        video.setDescription("my description");
+//        new ShareAction(activity).withMedia(video )
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
 //    }
 //
-//    /**
-//     * Twitter分享
-//     */
-//    public static void twitterShare(PlatformActionListener listener) {
-//
-//        Platform.ShareParams sp = new Platform.ShareParams();
-//        sp.setImageUrl("http://www.cxp521.com/images.jpg");
-//        sp.setText("程小鹏个人博客http://www.cxp521.com/");
-//        Platform twitter = ShareSDK.getPlatform(Twitter.NAME);
-//        // 设置分享事件回调
-//        twitter.setPlatformActionListener(listener);
-//
-//        // 执行图文分享
-//        twitter.share(sp);
+//    //分享多图
+//    public void shareMulImage(){
+//        UMImage imagelocal1 = new UMImage(activity, IMG_PATH);
+//        imagelocal1.setThumb(new UMImage(activity, R.drawable.thumb));
+//        UMImage imagelocal2 = new UMImage(activity, R.drawable.thumb);
+//        imagelocal2.setThumb(new UMImage(activity, R.drawable.thumb));
+//        new ShareAction(activity).withText("多图分享").withMedias(imagelocal1,imagelocal2 )
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
 //    }
-//
-//    /**
-//     * QQ分享
-//     */
-//    public static void qqShare(PlatformActionListener listener) {
-//
-//        QQ.ShareParams sp = new QQ.ShareParams();
-//        if (AppUtils.isEmpty(TITLE)) {
-//            sp.setTitle(TITLE);
-//            sp.setSite(TITLE);
+//    //分享文件
+//    public void shareFile(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        File file = new File(activity.getFilesDir()+"test.txt");
+//        if (!file.exists()){
+//            try {
+//                file.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 //        }
-//        if (AppUtils.isEmpty(CONTENT)) {
-//            sp.setText(CONTENT);
-//        }
-//        if (AppUtils.isEmpty(URL)) {
-//            sp.setTitleUrl((URL));  // 标题的超链接
-//        }
-//        if (AppUtils.isEmpty(IMG_PATH)) {
-//            sp.setImageUrl(IMG_PATH);
-//        }
+//        if (SocializeUtils.File2byte(file).length<=0){
+//            String content = "U-share分享";
+//            byte[] contentInBytes = content.getBytes();
+//            try {
+//                FileOutputStream fop = new FileOutputStream(file);
+//                fop.write(contentInBytes);
+//                fop.flush();
+//                fop.close();
 //
-//        Platform qq = ShareSDK.getPlatform(QQ.NAME);
-//        // 设置分享事件回调
-//        qq.setPlatformActionListener(listener);
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
 //
-//        // 执行图文分享
-//        qq.share(sp);
+//        }
+//        new ShareAction(activity)
+//                .withFile(file)
+//                .withText(CONTENT)
+//                .withSubject(Defaultcontent.title)
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
 //    }
-//
-//    /**
-//     * QQ空间分享
-//     */
-//    public static void qzoneShare(PlatformActionListener listener) {
-//
-//        QZone.ShareParams sp = new QZone.ShareParams();
-//        if (AppUtils.isEmpty(TITLE)) {
-//            sp.setTitle(TITLE);
-//            sp.setSite(TITLE);
-//        }
-//        if (AppUtils.isEmpty(CONTENT)) {
-//            sp.setText(CONTENT);
-//        }
-//        if (AppUtils.isEmpty(URL)) {
-//            sp.setTitleUrl((URL));  // 标题的超链接
-//        }
-//        if (AppUtils.isEmpty(IMG_PATH)) {
-//            sp.setImageUrl(IMG_PATH);
-//        }
-//
-//        Platform qzone = ShareSDK.getPlatform(QZone.NAME);
-//        // 设置分享事件回调
-//        qzone.setPlatformActionListener(listener);
-//
-//        // 执行图文分享
-//        qzone.share(sp);
+//    //分享表情
+//    public void shareEmoji(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        UMEmoji emoji = new UMEmoji(activity,"http://img5.imgtn.bdimg.com/it/u=2749190246,3857616763&fm=21&gp=0.jpg");
+//        emoji.setThumb(new UMImage(activity, R.drawable.thumb));
+//        new ShareAction(activity)
+//                .withMedia(emoji)
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
 //    }
-//
-//    /**
-//     * 短信分享
-//     */
-//    public static void smsShare(PlatformActionListener listener) {
-//
-//        ShortMessage.ShareParams sp = new ShortMessage.ShareParams();
-//
-//        if (AppUtils.isEmpty(TITLE)) {
-//            sp.setText(TITLE + CONTENT + URL);
-//        }
-//        Platform sms = ShareSDK.getPlatform(ShortMessage.NAME);
-//        // 设置分享事件回调
-//        sms.setPlatformActionListener(listener);
-//
-//        // 执行图文分享
-//        sms.share(sp);
+//    //小程序
+//    public void shareMINApp(Activity activity,SHARE_MEDIA share_media,UMShareListener umShareListener){
+//        UMMin umMin = new UMMin(Defaultcontent.url);
+//        umMin.setThumb(new UMImage(activity,R.drawable.thumb));
+//        umMin.setTitle(Defaultcontent.title);
+//        umMin.setDescription(CONTENT);
+//        umMin.setPath("pages/page10007/page10007");
+//        umMin.setUserName("gh_3ac2059ac66f");
+//        new ShareAction(activity)
+//                .withMedia(umMin)
+//                .setPlatform(share_media)
+//                .setCallback(umShareListener).share();
 //    }
-//
-//    /**
-//     * 微信朋友圈分享
-//     */
-//    public static void wechatMomentsShare(PlatformActionListener listener) {
-//        WechatMoments.ShareParams sp = new WechatMoments.ShareParams();
-//        if (AppUtils.isEmpty(TITLE)) {
-////            sp.setTitle(ConstantUtils.TITLE);
-//        }
-//        if (AppUtils.isEmpty(CONTENT)) {
-//            sp.setTitle(CONTENT);
-//        }
-//        if (AppUtils.isEmpty(IMG_PATH)) {
-//            sp.setImageUrl(IMG_PATH);
-//        }
-//        if (AppUtils.isEmpty(URL)) {
-//            sp.setUrl(URL);
-//        }
-//        sp.setShareType(Platform.SHARE_WEBPAGE);
-//
-//        Platform wechatMoments = ShareSDK.getPlatform(WechatMoments.NAME);
-//        // 设置分享事件回调
-//        wechatMoments.setPlatformActionListener(listener);
-//
-//        // 执行图文分享
-//        wechatMoments.share(sp);
-//    }
-//
-//    /**
-//     * 微信分享
-//     */
-//    public static void wechatShare(PlatformActionListener listener) {
-//
-//        Wechat.ShareParams sp = new Wechat.ShareParams();
-//        if (AppUtils.isEmpty(TITLE)) {
-//            sp.setTitle(TITLE);
-//        }
-//        if (AppUtils.isEmpty(CONTENT)) {
-//            sp.setText(CONTENT);
-//        }
-//        if (AppUtils.isEmpty(URL)) {
-//            sp.setUrl((URL));  // 标题的超链接
-//        }
-//        if (AppUtils.isEmpty(IMG_PATH)) {
-//            sp.setImageUrl(IMG_PATH);
-//        }
-//        sp.setShareType(Platform.SHARE_WEBPAGE);
-//
-//        Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
-//        // 设置分享事件回调
-//        wechat.setPlatformActionListener(listener);
-//
-//        // 执行图文分享
-//        wechat.share(sp);
-//    }
-//}
+}
