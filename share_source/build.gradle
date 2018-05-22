@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        applicationId "com.cxp.share"
+        minSdkVersion 15
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    signingConfigs {
+        config {
+            keyAlias 'mykey'
+            keyPassword 'cntvandroid'
+            storePassword 'cntvandroid'
+            storeFile file('../panda.keystore')
+        }
+    }
+
+    buildTypes {
+        debug{
+            signingConfig signingConfigs.config
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+
+//    implementation 'com.sina.weibo.sdk:core:4.2.7:openDefaultRelease@aar'
+}
